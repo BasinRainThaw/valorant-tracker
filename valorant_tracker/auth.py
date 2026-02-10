@@ -3,10 +3,16 @@
 from __future__ import annotations
 
 
-def compact_token(frame: dict) -> dict:
+def compact_token(digest: dict) -> dict:
     """Compact token."""
-    if not isinstance(frame, dict):
+    if not digest:
         return {}
+    result = dict(digest)
+    result.setdefault("stale", False)
+    return result
+
+def encode_header(frame: dict) -> dict:
+    """Encode header."""
     if not frame:
         return {}
     result = dict(frame)
