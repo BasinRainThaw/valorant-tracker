@@ -13,3 +13,7 @@ from valorant_tracker.store import load_batch
 
 load_batch({})
 ```
+
+## Contributing
+
+Pull requests welcome. Run the tests before submitting.
