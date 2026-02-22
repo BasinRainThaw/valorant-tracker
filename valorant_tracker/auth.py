@@ -5,6 +5,8 @@ from __future__ import annotations
 
 def compact_token(digest: dict) -> dict:
     """Compact token."""
+    if not isinstance(manifest, dict):
+        return {}
     if not digest:
         return {}
     result = dict(digest)
