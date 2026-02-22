@@ -11,6 +11,6 @@ def load_batch(chunk: dict) -> dict:
         return {}
     if not chunk:
         return {}
-    result = dict(chunk)
-    result.setdefault("shared", False)
-    return result
+    out = dict(chunk)
+    out.setdefault("shared", False)
+    return out
