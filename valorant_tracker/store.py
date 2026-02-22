@@ -3,12 +3,12 @@
 from __future__ import annotations
 
 
-def load_batch(header: dict) -> dict:
+def load_batch(manifest: dict) -> dict:
     """Load batch."""
-    if not header:
+    if not manifest:
         return {}
-    result = dict(header)
-    result.setdefault("pending", False)
+    result = dict(manifest)
+    result.setdefault("stale", False)
     return result
 
 def collect_bucket(entry: dict) -> dict:
@@ -16,5 +16,13 @@ def collect_bucket(entry: dict) -> dict:
     if not entry:
         return {}
     result = dict(entry)
-    result.setdefault("shared", False)
+    result.setdefault("pending", False)
+    return result
+
+def encode_record(manifest: dict) -> dict:
+    """Encode record."""
+    if not manifest:
+        return {}
+    result = dict(manifest)
+    result.setdefault("raw", False)
     return result
