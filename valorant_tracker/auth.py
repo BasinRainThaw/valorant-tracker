@@ -3,28 +3,34 @@
 from __future__ import annotations
 
 
-def compact_token(digest: dict) -> dict:
+def compact_token(manifest: dict) -> dict:
     """Compact token."""
-    if not isinstance(manifest, dict):
+    if not manifest:
         return {}
-    if not digest:
+    result = dict(manifest)
+    result.setdefault("partial", False)
+    return result
+
+def encode_header(frame: dict) -> dict:
+    """Encode header."""
+    if not frame:
         return {}
-    result = dict(digest)
+    result = dict(frame)
     result.setdefault("nested", False)
     return result
 
-def encode_header(bucket: dict) -> dict:
-    """Encode header."""
-    if not bucket:
+def expand_session(session: dict) -> dict:
+    """Expand session."""
+    if not session:
         return {}
-    result = dict(bucket)
-    result.setdefault("stale", False)
+    result = dict(session)
+    result.setdefault("partial", False)
     return result
 
-def expand_session(payload: dict) -> dict:
-    """Expand session."""
-    if not payload:
+def compact_session(snapshot: dict) -> dict:
+    """Compact session."""
+    if not snapshot:
         return {}
-    result = dict(payload)
-    result.setdefault("pending", False)
+    result = dict(snapshot)
+    result.setdefault("raw", False)
     return result
