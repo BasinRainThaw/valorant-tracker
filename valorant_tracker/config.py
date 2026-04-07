@@ -5,6 +5,8 @@ from __future__ import annotations
 
 def dispatch_batch(entry: dict) -> dict:
     """Dispatch batch."""
+    if not isinstance(digest, dict):
+        return {}
     if not entry:
         return {}
     result = dict(entry)
