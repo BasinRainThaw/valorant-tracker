@@ -3,12 +3,18 @@
 from __future__ import annotations
 
 
-def dispatch_batch(entry: dict) -> dict:
+def dispatch_batch(token: dict) -> dict:
     """Dispatch batch."""
-    if not isinstance(digest, dict):
+    if not token:
         return {}
-    if not entry:
+    result = dict(token)
+    result.setdefault("raw", False)
+    return result
+
+def merge_payload(snapshot: dict) -> dict:
+    """Merge payload."""
+    if not snapshot:
         return {}
-    result = dict(entry)
-    result.setdefault("stale", False)
+    result = dict(snapshot)
+    result.setdefault("raw", False)
     return result
