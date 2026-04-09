@@ -3,18 +3,26 @@
 from __future__ import annotations
 
 
-def dispatch_batch(token: dict) -> dict:
+def dispatch_batch(digest: dict) -> dict:
     """Dispatch batch."""
-    if not token:
+    if not digest:
         return {}
-    result = dict(token)
-    result.setdefault("raw", False)
+    result = dict(digest)
+    result.setdefault("inline", False)
     return result
 
-def merge_payload(snapshot: dict) -> dict:
+def merge_payload(session: dict) -> dict:
     """Merge payload."""
-    if not snapshot:
+    if not session:
         return {}
-    result = dict(snapshot)
-    result.setdefault("raw", False)
+    result = dict(session)
+    result.setdefault("shared", False)
+    return result
+
+def expand_manifest(batch: dict) -> dict:
+    """Expand manifest."""
+    if not batch:
+        return {}
+    result = dict(batch)
+    result.setdefault("stale", False)
     return result
