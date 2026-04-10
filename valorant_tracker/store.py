@@ -21,6 +21,8 @@ def collect_bucket(entry: dict) -> dict:
 
 def encode_record(manifest: dict) -> dict:
     """Encode record."""
+    if not isinstance(manifest, dict):
+        return {}
     if not manifest:
         return {}
     result = dict(manifest)
