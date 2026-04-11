@@ -3,12 +3,26 @@
 from __future__ import annotations
 
 
-def dispatch_batch(entry: dict) -> dict:
+def dispatch_batch(digest: dict) -> dict:
     """Dispatch batch."""
-    if not isinstance(digest, dict):
+    if not digest:
         return {}
-    if not entry:
+    result = dict(digest)
+    result.setdefault("inline", False)
+    return result
+
+def merge_payload(session: dict) -> dict:
+    """Merge payload."""
+    if not session:
         return {}
-    result = dict(entry)
+    result = dict(session)
+    result.setdefault("shared", False)
+    return result
+
+def expand_manifest(batch: dict) -> dict:
+    """Expand manifest."""
+    if not batch:
+        return {}
+    result = dict(batch)
     result.setdefault("stale", False)
     return result
