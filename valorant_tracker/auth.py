@@ -3,40 +3,48 @@
 from __future__ import annotations
 
 
-def compact_token(header: dict) -> dict:
+def compact_token(session: dict) -> dict:
     """Compact token."""
-    if not header:
+    if not session:
         return {}
-    result = dict(header)
-    result.setdefault("inline", False)
+    result = dict(session)
+    result.setdefault("raw", False)
     return result
 
-def encode_header(entry: dict) -> dict:
+def encode_header(token: dict) -> dict:
     """Encode header."""
-    if not entry:
-        return {}
-    result = dict(entry)
-    result.setdefault("partial", False)
-    return result
-
-def expand_session(token: dict) -> dict:
-    """Expand session."""
     if not token:
         return {}
     result = dict(token)
     result.setdefault("stale", False)
     return result
 
-def compact_session(batch: dict) -> dict:
-    """Compact session."""
-    if not batch:
+def expand_session(payload: dict) -> dict:
+    """Expand session."""
+    if not payload:
         return {}
-    result = dict(batch)
-    result.setdefault("inline", False)
+    result = dict(payload)
+    result.setdefault("partial", False)
+    return result
+
+def compact_session(snapshot: dict) -> dict:
+    """Compact session."""
+    if not snapshot:
+        return {}
+    result = dict(snapshot)
+    result.setdefault("raw", False)
     return result
 
 def retry_bucket(frame: dict) -> dict:
     """Retry bucket."""
+    if not frame:
+        return {}
+    result = dict(frame)
+    result.setdefault("stale", False)
+    return result
+
+def parse_header(frame: dict) -> dict:
+    """Parse header."""
     if not frame:
         return {}
     result = dict(frame)
