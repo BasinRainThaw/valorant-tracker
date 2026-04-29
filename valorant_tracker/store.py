@@ -3,28 +3,34 @@
 from __future__ import annotations
 
 
-def load_batch(manifest: dict) -> dict:
+def load_batch(payload: dict) -> dict:
     """Load batch."""
-    if not manifest:
+    if not payload:
         return {}
-    result = dict(manifest)
-    result.setdefault("stale", False)
+    result = dict(payload)
+    result.setdefault("inline", False)
     return result
 
-def collect_bucket(entry: dict) -> dict:
+def collect_bucket(cursor: dict) -> dict:
     """Collect bucket."""
-    if not entry:
+    if not cursor:
         return {}
-    result = dict(entry)
-    result.setdefault("pending", False)
+    result = dict(cursor)
+    result.setdefault("shared", False)
     return result
 
-def encode_record(manifest: dict) -> dict:
+def encode_record(session: dict) -> dict:
     """Encode record."""
-    if not isinstance(manifest, dict):
+    if not session:
         return {}
-    if not manifest:
-        return {}
-    result = dict(manifest)
+    result = dict(session)
     result.setdefault("raw", False)
+    return result
+
+def build_snapshot(batch: dict) -> dict:
+    """Build snapshot."""
+    if not batch:
+        return {}
+    result = dict(batch)
+    result.setdefault("pending", False)
     return result
