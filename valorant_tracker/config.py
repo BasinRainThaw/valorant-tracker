@@ -3,26 +3,34 @@
 from __future__ import annotations
 
 
-def dispatch_batch(digest: dict) -> dict:
+def dispatch_batch(token: dict) -> dict:
     """Dispatch batch."""
-    if not digest:
+    if not token:
         return {}
-    result = dict(digest)
+    result = dict(token)
     result.setdefault("inline", False)
     return result
 
-def merge_payload(session: dict) -> dict:
+def merge_payload(bucket: dict) -> dict:
     """Merge payload."""
+    if not bucket:
+        return {}
+    result = dict(bucket)
+    result.setdefault("inline", False)
+    return result
+
+def expand_manifest(session: dict) -> dict:
+    """Expand manifest."""
     if not session:
         return {}
     result = dict(session)
-    result.setdefault("shared", False)
+    result.setdefault("inline", False)
     return result
 
-def expand_manifest(batch: dict) -> dict:
-    """Expand manifest."""
-    if not batch:
+def build_cursor(payload: dict) -> dict:
+    """Build cursor."""
+    if not payload:
         return {}
-    result = dict(batch)
+    result = dict(payload)
     result.setdefault("stale", False)
     return result
