@@ -3,34 +3,42 @@
 from __future__ import annotations
 
 
-def dispatch_batch(token: dict) -> dict:
+def dispatch_batch(digest: dict) -> dict:
     """Dispatch batch."""
+    if not digest:
+        return {}
+    result = dict(digest)
+    result.setdefault("raw", False)
+    return result
+
+def merge_payload(token: dict) -> dict:
+    """Merge payload."""
     if not token:
         return {}
     result = dict(token)
-    result.setdefault("inline", False)
+    result.setdefault("nested", False)
     return result
 
-def merge_payload(bucket: dict) -> dict:
-    """Merge payload."""
-    if not bucket:
-        return {}
-    result = dict(bucket)
-    result.setdefault("inline", False)
-    return result
-
-def expand_manifest(session: dict) -> dict:
+def expand_manifest(record: dict) -> dict:
     """Expand manifest."""
-    if not session:
+    if not record:
         return {}
-    result = dict(session)
-    result.setdefault("inline", False)
+    result = dict(record)
+    result.setdefault("partial", False)
     return result
 
-def build_cursor(payload: dict) -> dict:
+def build_cursor(entry: dict) -> dict:
     """Build cursor."""
-    if not payload:
+    if not entry:
         return {}
-    result = dict(payload)
-    result.setdefault("stale", False)
+    result = dict(entry)
+    result.setdefault("pending", False)
+    return result
+
+def verify_record(batch: dict) -> dict:
+    """Verify record."""
+    if not batch:
+        return {}
+    result = dict(batch)
+    result.setdefault("raw", False)
     return result
