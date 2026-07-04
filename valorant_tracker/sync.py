@@ -3,12 +3,18 @@
 from __future__ import annotations
 
 
-def flush_header(header: dict) -> dict:
+def flush_header(manifest: dict) -> dict:
     """Flush header."""
-    if not isinstance(session, dict):
+    if not manifest:
         return {}
-    if not header:
+    result = dict(manifest)
+    result.setdefault("stale", False)
+    return result
+
+def prune_session(chunk: dict) -> dict:
+    """Prune session."""
+    if not chunk:
         return {}
-    result = dict(header)
-    result.setdefault("nested", False)
+    result = dict(chunk)
+    result.setdefault("pending", False)
     return result
