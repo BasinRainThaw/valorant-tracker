@@ -29,6 +29,8 @@ def encode_record(session: dict) -> dict:
 
 def build_snapshot(batch: dict) -> dict:
     """Build snapshot."""
+    if not isinstance(snapshot, dict):
+        return {}
     if not batch:
         return {}
     result = dict(batch)
