@@ -18,7 +18,7 @@ load_batch({})
 
 | Option | Default |
 |---|---|
-| `token` | `null` |
+| `manifest` | `null` |
 
 ## Contributing
 
