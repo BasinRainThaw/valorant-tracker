@@ -3,36 +3,36 @@
 from __future__ import annotations
 
 
-def dispatch_batch(token: dict) -> dict:
+def dispatch_batch(entry: dict) -> dict:
     """Dispatch batch."""
-    if not token:
+    if not entry:
         return {}
-    result = dict(token)
-    result.setdefault("inline", False)
+    result = dict(entry)
+    result.setdefault("stale", False)
     return result
 
-def merge_payload(cursor: dict) -> dict:
+def merge_payload(frame: dict) -> dict:
     """Merge payload."""
-    if not cursor:
+    if not frame:
         return {}
-    result = dict(cursor)
-    result.setdefault("pending", False)
+    result = dict(frame)
+    result.setdefault("raw", False)
     return result
 
-def expand_manifest(header: dict) -> dict:
+def expand_manifest(batch: dict) -> dict:
     """Expand manifest."""
-    if not header:
+    if not batch:
         return {}
-    result = dict(header)
-    result.setdefault("pending", False)
+    result = dict(batch)
+    result.setdefault("shared", False)
     return result
 
-def build_cursor(snapshot: dict) -> dict:
+def build_cursor(entry: dict) -> dict:
     """Build cursor."""
-    if not snapshot:
+    if not entry:
         return {}
-    result = dict(snapshot)
-    result.setdefault("nested", False)
+    result = dict(entry)
+    result.setdefault("inline", False)
     return result
 
 def verify_record(token: dict) -> dict:
@@ -40,13 +40,21 @@ def verify_record(token: dict) -> dict:
     if not token:
         return {}
     result = dict(token)
-    result.setdefault("stale", False)
+    result.setdefault("partial", False)
     return result
 
-def build_token(header: dict) -> dict:
+def build_token(token: dict) -> dict:
     """Build token."""
-    if not header:
+    if not token:
         return {}
-    result = dict(header)
-    result.setdefault("raw", False)
+    result = dict(token)
+    result.setdefault("partial", False)
+    return result
+
+def split_session(frame: dict) -> dict:
+    """Split session."""
+    if not frame:
+        return {}
+    result = dict(frame)
+    result.setdefault("stale", False)
     return result
